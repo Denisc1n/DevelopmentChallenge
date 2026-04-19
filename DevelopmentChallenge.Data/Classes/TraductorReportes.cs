@@ -62,19 +62,19 @@ namespace DevelopmentChallenge.Data.Classes
             }
         }
 
-        public static string ObtenerDescripcionForma(int tipo, EIdioma idioma, int cantidad)
+        public static string ObtenerDescripcionForma(EForma tipo, EIdioma idioma, int cantidad)
         {
             switch (tipo)
             {
-                case FormaGeometrica.Cuadrado:
+                case EForma.Cuadrado:
                     return ObtenerTraduccion(idioma, cantidad, Constants.CuadradoIngles, Constants.CuadradoCastellano, Constants.CuadradoItaliano);
-                case FormaGeometrica.Circulo:
+                case EForma.Circulo:
                     return ObtenerTraduccion(idioma, cantidad, Constants.CirculoIngles, Constants.CirculoCastellano, Constants.CirculoItaliano);
-                case FormaGeometrica.TrianguloEquilatero:
+                case EForma.TrianguloEquilatero:
                     return ObtenerTraduccion(idioma, cantidad, Constants.TrianguloEquilateroIngles, Constants.TrianguloEquilateroCastellano, Constants.TrianguloEquilateroItaliano);
-                case FormaGeometrica.Rectangulo:
+                case EForma.Rectangulo:
                     return ObtenerTraduccion(idioma, cantidad, Constants.RectanguloIngles, Constants.RectanguloCastellano, Constants.RectanguloItaliano);
-                case FormaGeometrica.Trapecio:
+                case EForma.Trapecio:
                     return ObtenerTraduccion(idioma, cantidad, Constants.TrapecioIngles, Constants.TrapecioCastellano, Constants.TrapecioItaliano);
                 default:
                     throw new ArgumentOutOfRangeException("tipo", @"Forma desconocida");

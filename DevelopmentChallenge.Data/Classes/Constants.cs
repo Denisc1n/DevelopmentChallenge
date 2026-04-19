@@ -6,6 +6,22 @@ using System.Threading.Tasks;
 
 namespace DevelopmentChallenge.Data.Classes
 {
+    public enum EIdioma
+    {
+        Castellano = 1,
+        Ingles = 2,
+        Italiano = 3
+    }
+
+    public enum EForma
+    {
+        Cuadrado = 1,
+        TrianguloEquilatero = 2,
+        Circulo = 3,
+        Rectangulo = 4,
+        Trapecio = 5
+    }
+
     internal sealed class TraduccionForma
     {
         public TraduccionForma(string singular, string plural)
@@ -50,4 +66,5 @@ namespace DevelopmentChallenge.Data.Classes
         public static readonly TraduccionForma PerimetroItaliano = new TraduccionForma("Perimetro", "Perimetri");
 
     }
+
 }

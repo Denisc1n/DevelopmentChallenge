@@ -18,13 +18,6 @@ using System.Text;
 
 namespace DevelopmentChallenge.Data.Classes
 {
-    public enum EIdioma
-    {
-        Castellano = 1,
-        Ingles = 2,
-        Italiano = 3
-    }
-
     internal interface IFormaGeometrica
     {
         decimal CalcularArea();
@@ -42,8 +35,6 @@ namespace DevelopmentChallenge.Data.Classes
         }
     }
 
-    
-
     public class FormaGeometrica
     {
         private delegate IFormaGeometrica CreadorForma(decimal[] medidas);
@@ -56,31 +47,14 @@ namespace DevelopmentChallenge.Data.Classes
             public FormaGeometrica Muestra { get; set; }
         }
 
-        private static readonly IDictionary<int, CreadorForma> CreadoresForma = new Dictionary<int, CreadorForma>
+        private static readonly IDictionary<EForma, CreadorForma> CreadoresForma = new Dictionary<EForma, CreadorForma>
         {
-            { Cuadrado, medidas => new CuadradoForma(ObtenerMedida(medidas, 0)) },
-            { Circulo, medidas => new CirculoForma(ObtenerMedida(medidas, 0)) },
-            { TrianguloEquilatero, medidas => new TrianguloEquilateroForma(ObtenerMedida(medidas, 0)) },
-            { Rectangulo, medidas => new RectanguloForma(ObtenerMedida(medidas, 0), ObtenerMedida(medidas, 1)) },
-            { Trapecio, medidas => new TrapecioForma(ObtenerMedida(medidas, 0), ObtenerMedida(medidas, 1), ObtenerMedida(medidas, 2)) }
+            { EForma.Cuadrado, medidas => new CuadradoForma(ObtenerMedida(medidas, 0)) },
+            { EForma.Circulo, medidas => new CirculoForma(ObtenerMedida(medidas, 0)) },
+            { EForma.TrianguloEquilatero, medidas => new TrianguloEquilateroForma(ObtenerMedida(medidas, 0)) },
+            { EForma.Rectangulo, medidas => new RectanguloForma(ObtenerMedida(medidas, 0), ObtenerMedida(medidas, 1)) },
+            { EForma.Trapecio, medidas => new TrapecioForma(ObtenerMedida(medidas, 0), ObtenerMedida(medidas, 1), ObtenerMedida(medidas, 2)) }
         };
-
-        #region Formas
-
-        public const int Cuadrado = 1;
-        public const int TrianguloEquilatero = 2;
-        public const int Circulo = 3;
-        public const int Rectangulo = 4;
-        public const int Trapecio = 5;
-        #endregion
-
-        #region Idiomas
-
-        public const int Castellano = (int)EIdioma.Castellano;
-        public const int Ingles = (int)EIdioma.Ingles;
-        public const int Italiano = (int)EIdioma.Italiano;
-
-        #endregion
 
         private readonly IFormaGeometrica _forma;
 
@@ -162,7 +136,7 @@ namespace DevelopmentChallenge.Data.Classes
         {
             CreadorForma creadorForma;
 
-            if (CreadoresForma.TryGetValue(tipo, out creadorForma))
+            if (CreadoresForma.TryGetValue((EForma)tipo, out creadorForma))
             {
                 return creadorForma(medidas);
             }
@@ -197,7 +171,7 @@ namespace DevelopmentChallenge.Data.Classes
 
         public string ObtenerDescripcion(EIdioma idioma, int cantidad)
         {
-            return TraductorReportes.ObtenerDescripcionForma(Tipo, idioma, cantidad);
+            return TraductorReportes.ObtenerDescripcionForma((EForma)Tipo, idioma, cantidad);
         }
     }
 }
