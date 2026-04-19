@@ -58,14 +58,14 @@ namespace DevelopmentChallenge.Data.Classes
 
         private readonly IFormaGeometrica _forma;
 
-        public int Tipo { get; }
+        public EForma Tipo { get; }
 
-        public FormaGeometrica(int tipo, decimal ancho)
+        public FormaGeometrica(EForma tipo, decimal ancho)
             : this(tipo, new[] { ancho })
         {
         }
 
-        public FormaGeometrica(int tipo, params decimal[] medidas)
+        public FormaGeometrica(EForma tipo, params decimal[] medidas)
         {
             Tipo = tipo;
             _forma = CrearForma(tipo, medidas);
@@ -132,11 +132,10 @@ namespace DevelopmentChallenge.Data.Classes
             return string.Empty;
         }
 
-        private static IFormaGeometrica CrearForma(int tipo, decimal[] medidas)
+        private static IFormaGeometrica CrearForma(EForma tipo, decimal[] medidas)
         {
-            CreadorForma creadorForma;
 
-            if (CreadoresForma.TryGetValue((EForma)tipo, out creadorForma))
+            if (CreadoresForma.TryGetValue(tipo, out CreadorForma creadorForma))
             {
                 return creadorForma(medidas);
             }
