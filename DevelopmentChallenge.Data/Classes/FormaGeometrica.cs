@@ -28,11 +28,6 @@ namespace DevelopmentChallenge.Data.Classes
     {
         public abstract decimal CalcularArea();
         public abstract decimal CalcularPerimetro();
-
-        protected static bool EsSingular(int cantidad)
-        {
-            return cantidad == 1;
-        }
     }
 
     public class FormaGeometrica
@@ -150,7 +145,14 @@ namespace DevelopmentChallenge.Data.Classes
                 throw new ArgumentException("La forma no tiene las medidas requeridas.", "medidas");
             }
 
-            return medidas[indice];
+            var medida = medidas[indice];
+
+            if (medida <= 0)
+            {
+                throw new ArgumentOutOfRangeException("medidas", "Las medidas de la forma deben ser mayores a cero.");
+            }
+
+            return medida;
         }
 
         public decimal CalcularArea()
